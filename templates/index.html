@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5; /* Light Gray */
+            color: #000000; /* Black */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #3333CC; /* Dark Blue */
+        }
+        h2 {
+            color: #3333CC; /* Dark Blue */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #E0E0E0; /* Light Gray */
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #E0E0E0; /* Light Gray */
+        }
+        form {
+            margin-top: 20px;
+        }
+        a {
+            color: #007000; /* Green */
+        }
+        input[type="text"],
+        input[type="number"] {
+            background-color: #FFFFFF; /* White */
+            border: 1px solid #E0E0E0; /* Light Gray */
+            padding: 5px;
+            margin: 5px 0;
+        }
+        button[type="submit"] {
+            background-color: #3333CC; /* Dark Blue */
+            color: #FFFFFF; /* White */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Library Management System</h1>
+
+        <h2>Books</h2>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Copies Available</th>
+                <th>Year Published</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.copies }}</td>
+                <td>{{ book.year_published }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Customers</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.id }}</td>
+                <td>{{ customer.name }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Actions</h2>
+        <form action="/add_book" method="post">
+            <h3>Add a New Book</h3>
+            <label for="title">Title:</label>
+            <input type="text" name="title" required>
+            <label for="author">Author:</label>
+            <input type="text" name="author" required>
+            <label for="copies">Copies Available:</label>
+            <input type="number" name="copies" required>
+            <label for="year_published">Year Published:</label> <!-- Include Year Published -->
+            <input type="number" name="year_published" required>
+            <button type="submit">Add Book</button>
+        </form>
+
+        <form action="/add_customer" method="post">
+            <h3>Add a New Customer</h3>
+            <label for="id">ID:</label>
+            <input type="text" name="id" required>
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+            <button type="submit">Add Customer</button>
+        </form>
+
+        <form action="/borrow_book" method="post">
+            <h3>Borrow a Book</h3>
+            <label for="customer_id">Customer ID:</label>
+            <input type="text" name="customer_id" required>
+            <label for="book_title">Book Title:</label>
+            <input type="text" name="book_title" required>
+            <button type="submit">Borrow Book</button>
+        </form>
+
+        <form action="/return_book" method="post">
+            <h3>Return a Book</h3>
+            <label for="customer_id">Customer ID:</label>
+            <input type="text" name="customer_id" required>
+            <label for="book_title">Book Title:</label>
+            <input type="text" name="book_title" required>
+            <button type="submit">Return Book</button>
+        </form>
+    </div>
+</body>
+</html>
